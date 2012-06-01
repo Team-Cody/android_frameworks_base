@@ -578,12 +578,17 @@ class LockScreen extends LinearLayout implements KeyguardScreen {
                         // add background to lock screen.
                         rlout.addView(flayout,0);
                     }
+                    Context settingsContext = context.createPackageContext("com.android.settings", 0);
+                    String wallpaperFile = settingsContext.getFilesDir() + "/lockwallpaper";
+                    Bitmap background = BitmapFactory.decodeFile(wallpaperFile);
+                    layout.setBackgroundDrawable(new BitmapDrawable(background));
                 } catch (NameNotFoundException e) {
                 }
             }
         }
     }
 
+<<<<<<< HEAD
     static void handleHomeLongPress(Context context) {
         int homeLongAction = (Settings.System.getInt(context.getContentResolver(),
                 Settings.System.LOCKSCREEN_LONG_HOME_ACTION, -1));
@@ -596,6 +601,8 @@ class LockScreen extends LinearLayout implements KeyguardScreen {
         }
     }
 
+=======
+>>>>>>> 0d57969... Framework : Lockscreen background customization (1/2)
     private boolean isSilentMode() {
         return mAudioManager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL;
     }
