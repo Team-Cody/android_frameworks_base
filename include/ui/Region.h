@@ -24,7 +24,7 @@
 
 #include <ui/Rect.h>
 
-#if defined (LIBAGL_USE_GRALLOC_COPYBITS) || defined (STE_HARDWARE)
+#if defined(STE_HARDWARE) || defined(LIBAGL_USE_GRALLOC_COPYBITS)
 #include <hardware/copybit.h>
 #endif
 
@@ -187,7 +187,7 @@ Region& Region::operator += (const Point& pt) {
 }
 
 
-#if defined (LIBAGL_USE_GRALLOC_COPYBITS) || defined (STE_HARDWARE)
+#if defined(STE_HARDWARE) || defined(LIBAGL_USE_GRALLOC_COPYBITS)
 // ---------------------------------------------------------------------------
 
 struct region_iterator : public copybit_region_t {
