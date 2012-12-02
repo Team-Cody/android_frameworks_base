@@ -430,7 +430,7 @@ VideoFrame *StagefrightMetadataRetriever::getFrameAtTime(
     if (frame == NULL) {
         LOGV("Software decoder failed to extract thumbnail, "
              "trying hardware decoder.");
-#ifndef QCOM_HARDWARE
+#if defined(QCOM_LEGACY_OMX) || !defined(QCOM_HARDWARE)
             frame = extractVideoFrameWithCodecFlags(&mClient, trackMeta, source, 0,
                         timeUs, option);
 #else
