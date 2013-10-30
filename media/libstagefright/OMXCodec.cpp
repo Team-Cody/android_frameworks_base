@@ -2348,7 +2348,6 @@ status_t OMXCodec::allocateBuffersOnPort(OMX_U32 portIndex) {
             return err;
         }
     }
-#endif
 
     OMX_PARAM_PORTDEFINITIONTYPE def;
     InitOMXParams(&def);
