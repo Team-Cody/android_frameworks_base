@@ -285,6 +285,7 @@ status_t BootAnimation::readyToRun() {
 #ifdef PRELOAD_BOOTANIMATION
     // Preload the bootanimation zip on memory, so we don't stutter
     // when showing the animation
+    // If USER_BOOTANIMATION_FILE is present, make sure it is loaded!
     FILE* fd;
     if (encryptedAnimation && access(SYSTEM_ENCRYPTED_BOOTANIMATION_FILE, R_OK) == 0)
         fd = fopen(SYSTEM_ENCRYPTED_BOOTANIMATION_FILE, "r");
