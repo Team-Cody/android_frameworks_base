@@ -457,14 +457,13 @@ class KeyguardStatusViewManager implements OnClickListener {
             }
             if (mWeatherUpdateTime != null) {
                 mWeatherUpdateTime.setVisibility(View.GONE);
-<<<<<<< HEAD
+
             if (mUpdateTime != null) {
                 mUpdateTime.setVisibility(View.GONE);
             }
             if (mWeatherTemp != null) {
                 mWeatherTemp.setText(useMetric ? "0°C" : "0°F");
-=======
->>>>>>> parent of 3366f1f... lockscreen weather: capitalize C/F temps
+
             }
             if (mWeatherTempsPanel != null ) {
                 mWeatherTempsPanel.setVisibility(View.GONE);
@@ -487,9 +486,9 @@ class KeyguardStatusViewManager implements OnClickListener {
             String urlWithDegreeUnit;
 
             if (celcius) {
-                urlWithDegreeUnit = URL_YAHOO_API_WEATHER + "c";
+                urlWithDegreeUnit = URL_YAHOO_API_WEATHER + "C";
             } else {
-                urlWithDegreeUnit = URL_YAHOO_API_WEATHER + "f";
+                urlWithDegreeUnit = URL_YAHOO_API_WEATHER + "F";
             }
 
             return new HttpRetriever().getDocumentFromURL(String.format(urlWithDegreeUnit, woeid));
