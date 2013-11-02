@@ -578,10 +578,6 @@ class LockScreen extends LinearLayout implements KeyguardScreen {
                         // add background to lock screen.
                         rlout.addView(flayout,0);
                     }
-                    Context settingsContext = context.createPackageContext("com.android.settings", 0);
-                    String wallpaperFile = settingsContext.getFilesDir() + "/lockwallpaper";
-                    Bitmap background = BitmapFactory.decodeFile(wallpaperFile);
-                    layout.setBackgroundDrawable(new BitmapDrawable(background));
                 } catch (NameNotFoundException e) {
                 }
             }
