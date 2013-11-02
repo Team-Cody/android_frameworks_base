@@ -457,13 +457,6 @@ class KeyguardStatusViewManager implements OnClickListener {
             }
             if (mWeatherUpdateTime != null) {
                 mWeatherUpdateTime.setVisibility(View.GONE);
-
-            if (mUpdateTime != null) {
-                mUpdateTime.setVisibility(View.GONE);
-            }
-            if (mWeatherTemp != null) {
-                mWeatherTemp.setText(useMetric ? "0°C" : "0°F");
-
             }
             if (mWeatherTempsPanel != null ) {
                 mWeatherTempsPanel.setVisibility(View.GONE);
