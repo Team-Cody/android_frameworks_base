@@ -584,6 +584,7 @@ class LockScreen extends LinearLayout implements KeyguardScreen {
         }
     }
 
+<<<<<<< HEAD
     static void handleHomeLongPress(Context context) {
         int homeLongAction = (Settings.System.getInt(context.getContentResolver(),
                 Settings.System.LOCKSCREEN_LONG_HOME_ACTION, -1));
@@ -596,6 +597,8 @@ class LockScreen extends LinearLayout implements KeyguardScreen {
         }
     }
 
+=======
+>>>>>>> 0d57969... Framework : Lockscreen background customization (1/2)
     private boolean isSilentMode() {
         return mAudioManager.getRingerMode() != AudioManager.RINGER_MODE_NORMAL;
     }
