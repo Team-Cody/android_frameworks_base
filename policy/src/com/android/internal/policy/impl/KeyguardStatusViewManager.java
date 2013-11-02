@@ -455,16 +455,13 @@ class KeyguardStatusViewManager implements OnClickListener {
             if (mWeatherCondition != null) {
                 mWeatherCondition.setText(R.string.weather_tap_to_refresh);
             }
-<<<<<<< HEAD
             if (mWeatherUpdateTime != null) {
                 mWeatherUpdateTime.setVisibility(View.GONE);
-=======
             if (mUpdateTime != null) {
                 mUpdateTime.setVisibility(View.GONE);
             }
             if (mWeatherTemp != null) {
                 mWeatherTemp.setText(useMetric ? "0°C" : "0°F");
->>>>>>> edea906... lockscreen weather: capitalize C/F temps
             }
             if (mWeatherTempsPanel != null ) {
                 mWeatherTempsPanel.setVisibility(View.GONE);
