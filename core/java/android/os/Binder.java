@@ -214,6 +214,7 @@ public class Binder implements IBinder {
             int flags) throws RemoteException {
         if (code == INTERFACE_TRANSACTION) {
             reply.writeString(getInterfaceDescriptor());
+            Log.i("twn_debug", "onTransact: reply.writestring: " + getInterfaceDescriptor());
             return true;
         } else if (code == DUMP_TRANSACTION) {
             ParcelFileDescriptor fd = data.readFileDescriptor();
@@ -290,7 +291,7 @@ public class Binder implements IBinder {
      */
     public final boolean transact(int code, Parcel data, Parcel reply,
             int flags) throws RemoteException {
-        if (false) Log.v("Binder", "Transact: " + code + " to " + this);
+        if (false) Log.i("Binder", "Transact: " + code + " to " + this);
         if (data != null) {
             data.setDataPosition(0);
         }
