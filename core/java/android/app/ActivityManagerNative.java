@@ -1577,11 +1577,11 @@ public abstract class ActivityManagerNative extends Binder implements IActivityM
         protected IActivityManager create() {
             IBinder b = ServiceManager.getService("activity");
             if (false) {
-                Log.i("ActivityManager", "default service binder = " + b);
+                Log.v("ActivityManager", "default service binder = " + b);
             }
             IActivityManager am = asInterface(b);
             if (false) {
-                Log.i("ActivityManager", "default service = " + am);
+                Log.v("ActivityManager", "default service = " + am);
             }
             return am;
         }
@@ -3503,12 +3503,10 @@ class ActivityManagerProxy implements IActivityManager
         reply.recycle();
     }
 
-	/*twn_placeholder*/
     public long[] getProcessPss(int[] pids) throws RemoteException {
         Parcel data = Parcel.obtain();
         Parcel reply = Parcel.obtain();
         data.writeInterfaceToken(IActivityManager.descriptor);
-        Log.i("twn_debug", "IActivityManager.descriptor set to: " + IActivityManager.descriptor);
         data.writeIntArray(pids);
         mRemote.transact(GET_PROCESS_PSS_TRANSACTION, data, reply, 0);
         reply.readException();

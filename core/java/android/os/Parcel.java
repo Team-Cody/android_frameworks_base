@@ -656,19 +656,15 @@ public final class Parcel {
         }
     }
 
-	/*twn_placeholder*/
     public final void writeIntArray(int[] val) {
         if (val != null) {
-			Log.i("twn_debug", "writeIntArray(" + val + ") called for");
             int N = val.length;
-            Log.i("twn_debug", "val.length = " + N);
             writeInt(N);
             for (int i=0; i<N; i++) {
                 writeInt(val[i]);
             }
         } else {
             writeInt(-1);
-            Log.e("twn_debug", "writeIntArray failed: Null value");
         }
     }
 
@@ -710,19 +706,14 @@ public final class Parcel {
 
     public final long[] createLongArray() {
         int N = readInt();
-        Log.i("twn_debug", "createLongArray, N = " + N);
         // >>3 because stored longs are 64 bits
         if (N >= 0 && N <= (dataAvail() >> 3)) {
             long[] val = new long[N];
             for (int i=0; i<N; i++) {
                 val[i] = readLong();
-                Log.i("twn_debug", "inside for loop, val[" + i + "] = " + val[i]);
             }
-            Log.i("twn_debug", "createLongArray, val = " + val + " returned");
             return val;
         } else {
-            Log.e("twn_debug", "createLongArray failed!");
-            Log.i("twn_debug", "     N = "+ N);
             return null;
         }
     }
