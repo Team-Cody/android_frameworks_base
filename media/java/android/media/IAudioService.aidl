@@ -73,11 +73,7 @@ interface IAudioService {
 
     void setSpeakerphoneOn(boolean on);
 
-    void setSpeakerMediaOn(boolean on);
-
     boolean isSpeakerphoneOn();
-
-    boolean isSpeakerMediaOn();
 
     void setBluetoothScoOn(boolean on);
 
