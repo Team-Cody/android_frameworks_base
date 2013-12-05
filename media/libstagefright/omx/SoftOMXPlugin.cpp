@@ -34,6 +34,13 @@ static const struct {
     const char *mRole;
 
 } kComponents[] = {
+#ifdef USES_NAM
+    { "OMX.ffmpeg.h264.decoder", "ffmpegvdec", "video_decoder.avc" },
+    { "OMX.ffmpeg.mpeg4.decoder", "ffmpegvdec", "video_decoder.mpeg4" },
+    { "OMX.ffmpeg.mpeg2v.decoder", "ffmpegvdec", "video_decoder.mpeg2" },
+    { "OMX.ffmpeg.h263.decoder", "ffmpegvdec", "video_decoder.h263" },
+    { "OMX.ffmpeg.vc1.decoder", "ffmpegvdec", "video_decoder.vc1" },
+#endif
 #ifdef STE_HARDWARE
     { "OMX.ST.aac.decoder", "ste_aacdec", "audio_decoder.aac" },
 #endif

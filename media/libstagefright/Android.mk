@@ -79,6 +79,10 @@ LOCAL_SRC_FILES:=                         \
         XINGSeeker.cpp                    \
         avc_utils.cpp                     \
 
+ifeq ($(USES_NAM),true)
+        LOCAL_SRC_FILES += ExtendedExtractor.cpp
+endif
+
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
         LOCAL_SRC_FILES += ExtendedExtractor.cpp
         LOCAL_SRC_FILES += ExtendedWriter.cpp
