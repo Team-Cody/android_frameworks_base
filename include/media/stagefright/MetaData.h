@@ -117,7 +117,7 @@ enum {
     kKeyValidSamples      = 'valD',  // int32_t
 
     kKeyIsUnreadable      = 'unre',  // bool (int32_t)
-#ifdef QCOM_HARDWARE
+#if (defined QCOM_HARDWARE) || (defined USES_NAM)
     kKeyRawCodecSpecificData = 'rcsd',  // raw data - added to support mmParser
     kKeyDivXVersion       = 'DivX',  // int32_t
     kKeyDivXDrm           = 'QDrm',  // void *
@@ -162,7 +162,7 @@ enum {
     kTypeAVCC        = 'avcc',
     kTypeD263        = 'd263',
 };
-#ifdef QCOM_HARDWARE
+#if (defined QCOM_HARDWARE) || (defined USES_NAM)
 enum {
     kTypeDivXVer_3_11,
     kTypeDivXVer_4,
