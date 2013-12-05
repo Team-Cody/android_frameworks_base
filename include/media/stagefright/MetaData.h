@@ -130,6 +130,7 @@ enum {
     kKeyWMABitspersample  = 'bsps',  // int64_t
     kKeyWMAVirPktSize     = 'vpks',  // int64_t
     kKeyWMVProfile        = 'wmvp',   //int32_t
+    kKeyWMVVersion        = 'wmvv',  // int32_t
 #endif
 
     // An indication that a video buffer has been rendered.
@@ -173,6 +174,11 @@ enum {
     kTypeWMA,
     kTypeWMAPro,
     kTypeWMALossLess,
+};
+enum {
+    kTypeWMVVer_7, // WMV1
+    kTypeWMVVer_8, // WMV2
+    kTypeWMVVer_9, // WMV3
 };
 #endif
 

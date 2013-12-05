@@ -388,8 +388,11 @@ private:
 
     OMXCodec(const OMXCodec &);
     OMXCodec &operator=(const OMXCodec &);
-#ifdef QCOM_HARDWARE
+#if (defined QCOM_HARDWARE) || (defined USES_NAM)
     status_t setWMAFormat(const sp<MetaData> &inputFormat);
+    status_t setWMVFormat(const sp<MetaData> &inputFormat);
+#endif
+#ifdef QCOM_HARDWARE
     void setAC3Format(int32_t numChannels, int32_t sampleRate);
 
     int32_t mNumBFrames;

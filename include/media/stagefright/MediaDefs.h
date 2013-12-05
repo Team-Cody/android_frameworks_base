@@ -81,7 +81,7 @@ extern const char *MEDIA_MIMETYPE_CONTAINER_3G2;
 #ifdef USES_NAM
 extern const char *MEDIA_MIMETYPE_VIDEO_VC1;
 extern const char *MEDIA_MIMETYPE_VIDEO_DIVX;
-extern const char *MEDIA_MIMETYPE_VIDEO_WMV12;
+extern const char *MEDIA_MIMETYPE_VIDEO_WMV;
 extern const char *MEDIA_MIMETYPE_VIDEO_FLV1;
 extern const char *MEDIA_MIMETYPE_VIDEO_RV;
 extern const char *MEDIA_MIMETYPE_VIDEO_MJPEG;

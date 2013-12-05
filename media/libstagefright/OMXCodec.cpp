@@ -338,7 +338,7 @@ static const CodecInfo kDecoderInfo[] = {
 #endif    
 #ifdef USES_NAM
     { MEDIA_MIMETYPE_AUDIO_AC3, "OMX.ffmpeg.ac3.decoder" },
-    { MEDIA_MIMETYPE_VIDEO_WMV12, "OMX.ffmpeg.wmv12.decoder" },
+    { MEDIA_MIMETYPE_VIDEO_WMV, "OMX.ffmpeg.wmv.decoder" },
     { MEDIA_MIMETYPE_AUDIO_WMA, "OMX.ffmpeg.wma.decoder" },
 #endif
 };
@@ -1041,6 +1041,16 @@ status_t OMXCodec::configureCodec(const sp<MetaData> &meta) {
         }
     }
 
+#ifdef USES_NAM
+    if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_WMV, mMIME)) {
+        LOGV("Setting the OMX_VIDEO_PARAM_WMVTYPE params");
+        status_t err = setWMVFormat(meta);
+        if (err != OK) {
+            return err;
+        }
+    }
+#endif
+
     int32_t bitRate = 0;
     if (mIsEncoder) {
         CHECK(meta->findInt32(kKeyBitRate, &bitRate));
@@ -1076,6 +1086,8 @@ status_t OMXCodec::configureCodec(const sp<MetaData> &meta) {
         CHECK(meta->findInt32(kKeyChannelCount, &numChannels));
         CHECK(meta->findInt32(kKeySampleRate, &sampleRate));
         setQCELPFormat(numChannels, sampleRate, bitRate);
+#endif
+#if (defined QCOM_HARDWARE) || (defined USES_NAM)        
     } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_WMA, mMIME))  {
         status_t err = setWMAFormat(meta);
         if(err!=OK){
@@ -1987,7 +1999,7 @@ status_t OMXCodec::setVideoOutputFormat(
         compressionFormat = OMX_VIDEO_CodingWMV;
 #endif
 #ifdef USES_NAM
-    } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_WMV12, mime)){
+	} else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_WMV, mime)){
         compressionFormat = OMX_VIDEO_CodingWMV;
 #endif
     } else {
@@ -4858,6 +4870,90 @@ status_t OMXCodec::setWMAFormat(const sp<MetaData> &meta)
 	        return err;
 	    }
 	}
+#endif
+
+#if USES_NAM
+status_t OMXCodec::setWMAFormat(const sp<MetaData> &meta)
+{
+    int32_t version;
+    int32_t numChannels;
+    int32_t bitRate;
+    int32_t sampleRate;
+    int32_t formattag;
+    OMX_AUDIO_PARAM_WMATYPE paramWMA;
+
+    if (mIsEncoder) {
+        CODEC_LOGE("WMA encoding not supported");
+        return OK;
+    }
+
+    CHECK(meta->findInt32(kKeyChannelCount, &numChannels));
+    CHECK(meta->findInt32(kKeySampleRate, &sampleRate));
+    CHECK(meta->findInt32(kKeyBitRate, &bitRate));
+
+    CODEC_LOGV("Channels: %d, SampleRate: %d, BitRate: %d",
+            numChannels, sampleRate, bitRate);
+
+    CHECK(meta->findInt32(kKeyWMAVersion, &version));
+
+    InitOMXParams(&paramWMA);
+    paramWMA.nPortIndex = kPortIndexInput;
+
+    status_t err = mOMX->getParameter(
+                       mNode, OMX_IndexParamAudioWma, &paramWMA, sizeof(paramWMA));
+    if (err != OK)
+        return err;
+
+    paramWMA.nChannels = numChannels;
+    paramWMA.nSamplingRate = sampleRate;
+    paramWMA.nBitRate = bitRate;
+
+    // http://msdn.microsoft.com/en-us/library/ff819498(v=vs.85).aspx
+    if(version == kTypeWMA) {
+        paramWMA.eFormat = OMX_AUDIO_WMAFormat7;
+    } else if (version == kTypeWMAPro) {
+        paramWMA.eFormat = OMX_AUDIO_WMAFormat8;
+    } else if (version == kTypeWMALossLess) {
+        paramWMA.eFormat = OMX_AUDIO_WMAFormat9;
+    }
+
+    err = mOMX->setParameter(
+                    mNode, OMX_IndexParamAudioWma, &paramWMA, sizeof(paramWMA));
+    return err;
+}
+
+status_t OMXCodec::setWMVFormat(const sp<MetaData> &meta)
+{
+    int32_t version;
+    OMX_VIDEO_PARAM_WMVTYPE paramWMV;
+
+    if (mIsEncoder) {
+        CODEC_LOGE("WMV encoding not supported");
+        return OK;
+    }
+
+    CHECK(meta->findInt32(kKeyWMVVersion, &version));
+
+    InitOMXParams(&paramWMV);
+    paramWMV.nPortIndex = kPortIndexInput;
+
+    status_t err = mOMX->getParameter(
+                       mNode, OMX_IndexParamVideoWmv, &paramWMV, sizeof(paramWMV));
+    if (err != OK)
+        return err;
+
+    if(version == kTypeWMVVer_7) {
+        paramWMV.eFormat = OMX_VIDEO_WMVFormat7;
+    } else if (version == kTypeWMVVer_8) {
+        paramWMV.eFormat = OMX_VIDEO_WMVFormat8;
+    } else if (version == kTypeWMVVer_9) {
+        paramWMV.eFormat = OMX_VIDEO_WMVFormat9;
+    }
+
+    err = mOMX->setParameter(
+                    mNode, OMX_IndexParamVideoWmv, &paramWMV, sizeof(paramWMV));
+    return err;
+}
 #endif
 
 void OMXCodec::setG711Format(int32_t numChannels) {

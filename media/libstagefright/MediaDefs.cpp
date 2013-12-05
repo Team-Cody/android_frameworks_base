@@ -77,7 +77,7 @@ const char *MEDIA_MIMETYPE_TEXT_3GPP = "text/3gpp-tt";
 #ifdef USES_NAM
 const char *MEDIA_MIMETYPE_VIDEO_VC1 = "video/vc1";
 const char *MEDIA_MIMETYPE_VIDEO_DIVX = "video/x-divx";
-const char *MEDIA_MIMETYPE_VIDEO_WMV12 = "video/x-wmv-1-2";
+const char *MEDIA_MIMETYPE_VIDEO_WMV = "video/x-ms-wmv";
 const char *MEDIA_MIMETYPE_VIDEO_FLV1 = "video/x-flv";
 const char *MEDIA_MIMETYPE_VIDEO_RV = "video/vnd.rn-realvideo";
 const char *MEDIA_MIMETYPE_VIDEO_MJPEG = "video/x-jpeg";
