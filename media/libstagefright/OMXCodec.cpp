@@ -247,8 +247,8 @@ static const CodecInfo kDecoderInfo[] = {
     { MEDIA_MIMETYPE_AUDIO_MPEG, "MP3Decoder" },
 #endif
 #ifdef USES_NAM
-    { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_I, "OMX.ffmpeg.mp3.decoder" },
-    { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_II, "OMX.ffmpeg.mp3.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_I, "OMX.ffmpeg.mp1.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_II, "OMX.ffmpeg.mp2.decoder" },
 #endif
     { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_II, "OMX.Nvidia.mp2.decoder" },
 //    { MEDIA_MIMETYPE_AUDIO_AMR_NB, "OMX.TI.AMR.decode" },
