@@ -246,6 +246,10 @@ static const CodecInfo kDecoderInfo[] = {
 #ifdef WITH_QCOM_LPA
     { MEDIA_MIMETYPE_AUDIO_MPEG, "MP3Decoder" },
 #endif
+#ifdef USES_NAM
+    { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_I, "OMX.ffmpeg.mp3.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_II, "OMX.ffmpeg.mp3.decoder" },
+#endif
     { MEDIA_MIMETYPE_AUDIO_MPEG_LAYER_II, "OMX.Nvidia.mp2.decoder" },
 //    { MEDIA_MIMETYPE_AUDIO_AMR_NB, "OMX.TI.AMR.decode" },
 //    { MEDIA_MIMETYPE_AUDIO_AMR_NB, "OMX.Nvidia.amr.decoder" },
