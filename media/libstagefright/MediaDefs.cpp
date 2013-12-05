@@ -105,6 +105,7 @@ const char *MEDIA_MIMETYPE_CONTAINER_APE = "audio/x-ape";
 const char *MEDIA_MIMETYPE_CONTAINER_MP2 = "audio/mpeg2";
 const char *MEDIA_MIMETYPE_CONTAINER_RA = "audio/vnd.rn-realaudio";
 const char *MEDIA_MIMETYPE_CONTAINER_WMA = "audio/x-ms-wma";
+const char *MEDIA_MIMETYPE_CONTAINER_DTS = "audio/vnd.dts";
 #endif // USES_NAM
 
 }  // namespace android

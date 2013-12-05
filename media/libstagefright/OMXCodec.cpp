@@ -345,6 +345,7 @@ static const CodecInfo kDecoderInfo[] = {
     { MEDIA_MIMETYPE_AUDIO_RA, "OMX.ffmpeg.ra.decoder" },
     { MEDIA_MIMETYPE_AUDIO_APE, "OMX.ffmpeg.ape.decoder" },
     { MEDIA_MIMETYPE_AUDIO_DTS, "OMX.ffmpeg.dts.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_FLAC, "OMX.ffmpeg.flac.decoder" },
 #endif
 };
 
@@ -1114,7 +1115,12 @@ status_t OMXCodec::configureCodec(const sp<MetaData> &meta) {
         status_t err = setDTSFormat(meta);
         if(err!=OK){
            return err;
-        }
+       }
+    } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_FLAC, mMIME))  {
+        status_t err = setFLACFormat(meta);
+        if(err!=OK){
+           return err;
+        }        
 #endif
     } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_G711_ALAW, mMIME)
             || !strcasecmp(MEDIA_MIMETYPE_AUDIO_G711_MLAW, mMIME)) {
@@ -2276,6 +2282,8 @@ void OMXCodec::setComponentRole(
             "audio_decoder.ape", NULL },
         { MEDIA_MIMETYPE_AUDIO_DTS,
             "audio_decoder.dts", NULL },
+        { MEDIA_MIMETYPE_AUDIO_FLAC,
+            "audio_decoder.flac", NULL },            
 #endif
     };
 
@@ -5098,6 +5106,42 @@ status_t OMXCodec::setDTSFormat(const sp<MetaData> &meta)
     return err;
 }
 
+status_t OMXCodec::setFLACFormat(const sp<MetaData> &meta)
+{
+    int32_t numChannels;
+    int32_t sampleRate;
+    int32_t bitsPerSample;
+    OMX_AUDIO_PARAM_FLACTYPE param;
+
+    if (mIsEncoder) {
+        CODEC_LOGE("FLAC encoding not supported");
+        return OK;
+    }
+
+    CHECK(meta->findInt32(kKeyChannelCount, &numChannels));
+    CHECK(meta->findInt32(kKeySampleRate, &sampleRate));
+    //CHECK(meta->findInt32(kKeyBitspersample, &bitsPerSample));
+
+    CODEC_LOGV("Channels: %d, SampleRate: %d",
+            numChannels, sampleRate);
+
+    InitOMXParams(&param);
+    param.nPortIndex = kPortIndexInput;
+
+    status_t err = mOMX->getParameter(
+                       mNode, OMX_IndexParamAudioFlac, &param, sizeof(param));
+    if (err != OK)
+        return err;
+
+    param.nChannels = numChannels;
+    param.nSamplingRate = sampleRate;
+    //param.nBitsPerSample = bitsPerSample;
+
+    err = mOMX->setParameter(
+                    mNode, OMX_IndexParamAudioFlac, &param, sizeof(param));
+    return err;
+}
+
 #endif
 
 void OMXCodec::setG711Format(int32_t numChannels) {
@@ -5792,6 +5836,7 @@ static const char *audioCodingTypeString(OMX_AUDIO_CODINGTYPE type) {
 #if USES_NAM
         "OMX_AUDIO_CodingAPE",
         "OMX_AUDIO_CodingDTS",
+        "OMX_AUDIO_CodingFLAC",
 #endif
     };
 

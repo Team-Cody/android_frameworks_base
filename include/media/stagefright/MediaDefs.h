@@ -109,6 +109,7 @@ extern const char *MEDIA_MIMETYPE_CONTAINER_APE;
 extern const char *MEDIA_MIMETYPE_CONTAINER_MP2;
 extern const char *MEDIA_MIMETYPE_CONTAINER_RA;
 extern const char *MEDIA_MIMETYPE_CONTAINER_WMA;
+extern const char *MEDIA_MIMETYPE_CONTAINER_DTS;
 #endif
 
 }  // namespace android

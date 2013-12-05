@@ -51,6 +51,7 @@ static const struct {
     { "OMX.ffmpeg.ra.decoder", "ffmpegadec", "audio_decoder.ra" },
     { "OMX.ffmpeg.ape.decoder", "ffmpegadec", "audio_decoder.ape" },
     { "OMX.ffmpeg.dts.decoder", "ffmpegadec", "audio_decoder.dts" },
+    { "OMX.ffmpeg.flac.decoder", "ffmpegadec", "audio_decoder.flac" },
 #endif
 #ifdef STE_HARDWARE
     { "OMX.ST.aac.decoder", "ste_aacdec", "audio_decoder.aac" },
