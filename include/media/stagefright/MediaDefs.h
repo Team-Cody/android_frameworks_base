@@ -86,9 +86,6 @@ extern const char *MEDIA_MIMETYPE_VIDEO_FLV1;
 extern const char *MEDIA_MIMETYPE_VIDEO_RV;
 extern const char *MEDIA_MIMETYPE_VIDEO_MJPEG;
 
-extern const char *MEDIA_MIMETYPE_AUDIO_MPEG_TCC;
-extern const char *MEDIA_MIMETYPE_AUDIO_AAC_TCC;
-extern const char *MEDIA_MIMETYPE_AUDIO_VORBIS_TCC;
 extern const char *MEDIA_MIMETYPE_AUDIO_APE;
 extern const char *MEDIA_MIMETYPE_AUDIO_WMA;
 extern const char *MEDIA_MIMETYPE_AUDIO_AC3;

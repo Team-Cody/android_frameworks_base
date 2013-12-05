@@ -82,9 +82,6 @@ const char *MEDIA_MIMETYPE_VIDEO_FLV1 = "video/x-flv";
 const char *MEDIA_MIMETYPE_VIDEO_RV = "video/vnd.rn-realvideo";
 const char *MEDIA_MIMETYPE_VIDEO_MJPEG = "video/x-jpeg";
 
-const char *MEDIA_MIMETYPE_AUDIO_MPEG_TCC = "audio/x-mpeg-tcc";
-const char *MEDIA_MIMETYPE_AUDIO_AAC_TCC = "audio/x-mp4a-latm-tcc";
-const char *MEDIA_MIMETYPE_AUDIO_VORBIS_TCC = "audio/x-vorbis-tcc";
 const char *MEDIA_MIMETYPE_AUDIO_APE = "audio/x-ape";
 const char *MEDIA_MIMETYPE_AUDIO_WMA = "audio/x-ms-wma";
 const char *MEDIA_MIMETYPE_AUDIO_AC3 = "audio/ac3";
