@@ -339,6 +339,7 @@ static const CodecInfo kDecoderInfo[] = {
 #ifdef USES_NAM
     { MEDIA_MIMETYPE_AUDIO_AC3, "OMX.ffmpeg.ac3.decoder" },
     { MEDIA_MIMETYPE_VIDEO_WMV12, "OMX.ffmpeg.wmv12.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_WMA, "OMX.ffmpeg.wma.decoder" },
 #endif
 };
 
