@@ -335,9 +335,10 @@ static const CodecInfo kDecoderInfo[] = {
     { MEDIA_MIMETYPE_AUDIO_WMA, "OMX.qcom.audio.decoder.wmaLossLess"},
     { MEDIA_MIMETYPE_AUDIO_WMA, "OMX.qcom.audio.decoder.wma10Pro"},
     { MEDIA_MIMETYPE_VIDEO_WMV, "OMX.qcom.video.decoder.vc1"},
-#ifdef USES_NAM
-    { MEDIA_MIMETYPE_VIDEO_WMV, "OMX.ffmpeg.vc1.decoder" },
 #endif    
+#ifdef USES_NAM
+    //{ MEDIA_MIMETYPE_VIDEO_WMV, "OMX.ffmpeg.vc1.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_AC3, "OMX.ffmpeg.ac3.decoder" },
 #endif
 };
 
@@ -2223,6 +2224,10 @@ void OMXCodec::setComponentRole(
             "audio_decoder.ac3", NULL },
         { MEDIA_MIMETYPE_VIDEO_DIVX311,
             "video_decoder.divx", NULL },
+#endif
+#ifdef USES_NAM
+        { MEDIA_MIMETYPE_AUDIO_AC3,
+            "audio_decoder.ac3", NULL },
 #endif
     };
 
