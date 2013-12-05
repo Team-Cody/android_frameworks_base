@@ -337,8 +337,8 @@ static const CodecInfo kDecoderInfo[] = {
     { MEDIA_MIMETYPE_VIDEO_WMV, "OMX.qcom.video.decoder.vc1"},
 #endif    
 #ifdef USES_NAM
-    //{ MEDIA_MIMETYPE_VIDEO_WMV, "OMX.ffmpeg.vc1.decoder" },
     { MEDIA_MIMETYPE_AUDIO_AC3, "OMX.ffmpeg.ac3.decoder" },
+    { MEDIA_MIMETYPE_VIDEO_WMV12, "OMX.ffmpeg.wmv12.decoder" },
 #endif
 };
 
@@ -1982,6 +1982,10 @@ status_t OMXCodec::setVideoOutputFormat(
     } else if(!strcasecmp(MEDIA_MIMETYPE_VIDEO_DIVX4, mime)) {
         compressionFormat = (OMX_VIDEO_CODINGTYPE)QOMX_VIDEO_CodingDivx;
     } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_WMV, mime)){
+        compressionFormat = OMX_VIDEO_CodingWMV;
+#endif
+#ifdef USES_NAM
+    } else if (!strcasecmp(MEDIA_MIMETYPE_VIDEO_WMV12, mime)){
         compressionFormat = OMX_VIDEO_CodingWMV;
 #endif
     } else {
