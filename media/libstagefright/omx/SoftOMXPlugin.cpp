@@ -40,7 +40,7 @@ static const struct {
     { "OMX.ffmpeg.mpeg2v.decoder", "ffmpegvdec", "video_decoder.mpeg2" },
     { "OMX.ffmpeg.h263.decoder", "ffmpegvdec", "video_decoder.h263" },
     { "OMX.ffmpeg.vc1.decoder", "ffmpegvdec", "video_decoder.vc1" },
-    //{ "OMX.ffmpeg.mp3.decoder", "ffmpegadec", "video_decoder.mp3" },
+    { "OMX.ffmpeg.mp3.decoder", "ffmpegadec", "video_decoder.mp3" },
     { "OMX.ffmpeg.aac.decoder", "ffmpegadec", "video_decoder.aac" },
     //{ "OMX.ffmpeg.ac3.decoder", "ffmpegadec", "video_decoder.ac3" },    
 #endif
