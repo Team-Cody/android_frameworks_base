@@ -156,6 +156,9 @@ enum {
     kKeyUseArbitraryMode  = 'ArbM'  //bool (int32_t)
 #endif
 
+#ifdef USES_NAM
+    kKeyBlockAlign     = 'blk',  // int32_t , should be different from kKeyWMABlockAlign
+#endif
 };
 
 enum {

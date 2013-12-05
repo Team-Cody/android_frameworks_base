@@ -1097,6 +1097,13 @@ status_t OMXCodec::configureCodec(const sp<MetaData> &meta) {
            return err;
         }
 #endif
+#ifdef USES_NAM
+    } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_RA, mMIME))  {
+        status_t err = setRAFormat(meta);
+        if(err!=OK){
+           return err;
+        }
+#endif
     } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_G711_ALAW, mMIME)
             || !strcasecmp(MEDIA_MIMETYPE_AUDIO_G711_MLAW, mMIME)) {
         // These are PCM-like formats with a fixed sample rate but
@@ -4961,6 +4968,48 @@ status_t OMXCodec::setWMVFormat(const sp<MetaData> &meta)
                     mNode, OMX_IndexParamVideoWmv, &paramWMV, sizeof(paramWMV));
     return err;
 }
+
+status_t OMXCodec::setRAFormat(const sp<MetaData> &meta)
+{
+    int32_t numChannels;
+    int32_t bitRate;
+    int32_t sampleRate;
+    int32_t blockAlign;
+    OMX_AUDIO_PARAM_RATYPE paramRA;
+
+    if (mIsEncoder) {
+        CODEC_LOGE("RA encoding not supported");
+        return OK;
+    }
+
+    CHECK(meta->findInt32(kKeyChannelCount, &numChannels));
+    CHECK(meta->findInt32(kKeySampleRate, &sampleRate));
+    CHECK(meta->findInt32(kKeyBitRate, &bitRate));
+    CHECK(meta->findInt32(kKeyBlockAlign, &blockAlign));
+
+    CODEC_LOGV("Channels: %d, SampleRate: %d, BitRate: %d, blockAlign: %d",
+            numChannels, sampleRate, bitRate, blockAlign);
+
+    InitOMXParams(&paramRA);
+    paramRA.nPortIndex = kPortIndexInput;
+
+    status_t err = mOMX->getParameter(
+                       mNode, OMX_IndexParamAudioRa, &paramRA, sizeof(paramRA));
+    if (err != OK)
+        return err;
+
+    paramRA.eFormat = OMX_AUDIO_RAFormatUnused; // FIXME, cook only???
+    paramRA.nChannels = numChannels;
+    paramRA.nSamplingRate = sampleRate;
+    // FIXME, HACK!!!, I use the nNumRegions parameter pass blockAlign!!!
+    // the cook audio codec need blockAlign!
+    paramRA.nNumRegions = blockAlign;
+
+    err = mOMX->setParameter(
+                    mNode, OMX_IndexParamAudioRa, &paramRA, sizeof(paramRA));
+    return err;
+}
+
 #endif
 
 void OMXCodec::setG711Format(int32_t numChannels) {
