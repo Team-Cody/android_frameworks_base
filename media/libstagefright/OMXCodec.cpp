@@ -343,6 +343,7 @@ static const CodecInfo kDecoderInfo[] = {
     { MEDIA_MIMETYPE_AUDIO_WMA, "OMX.ffmpeg.wma.decoder" },
     { MEDIA_MIMETYPE_VIDEO_RV, "OMX.ffmpeg.rv.decoder" },
     { MEDIA_MIMETYPE_AUDIO_RA, "OMX.ffmpeg.ra.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_APE, "OMX.ffmpeg.ape.decoder" },
 #endif
 };
 
@@ -1100,6 +1101,11 @@ status_t OMXCodec::configureCodec(const sp<MetaData> &meta) {
 #ifdef USES_NAM
     } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_RA, mMIME))  {
         status_t err = setRAFormat(meta);
+        if(err!=OK){
+           return err;
+        }
+    } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_APE, mMIME))  {
+        status_t err = setAPEFormat(meta);
         if(err!=OK){
            return err;
         }
@@ -2260,6 +2266,8 @@ void OMXCodec::setComponentRole(
 #ifdef USES_NAM
         { MEDIA_MIMETYPE_AUDIO_AC3,
             "audio_decoder.ac3", NULL },
+        { MEDIA_MIMETYPE_AUDIO_APE,
+            "audio_decoder.ape", NULL },
 #endif
     };
 
@@ -5010,6 +5018,42 @@ status_t OMXCodec::setRAFormat(const sp<MetaData> &meta)
     return err;
 }
 
+status_t OMXCodec::setAPEFormat(const sp<MetaData> &meta)
+{
+    int32_t numChannels;
+    int32_t sampleRate;
+    int32_t bitsPerSample;
+    OMX_AUDIO_PARAM_APETYPE param;
+
+    if (mIsEncoder) {
+        CODEC_LOGE("APE encoding not supported");
+        return OK;
+    }
+
+    CHECK(meta->findInt32(kKeyChannelCount, &numChannels));
+    CHECK(meta->findInt32(kKeySampleRate, &sampleRate));
+    CHECK(meta->findInt32(kKeyBitspersample, &bitsPerSample));
+
+    CODEC_LOGV("Channels: %d, SampleRate: %d",
+            numChannels, sampleRate);
+
+    InitOMXParams(&param);
+    param.nPortIndex = kPortIndexInput;
+
+    status_t err = mOMX->getParameter(
+                       mNode, OMX_IndexParamAudioApe, &param, sizeof(param));
+    if (err != OK)
+        return err;
+
+    param.nChannels = numChannels;
+    param.nSamplingRate = sampleRate;
+    param.nBitsPerSample = bitsPerSample;
+
+    err = mOMX->setParameter(
+                    mNode, OMX_IndexParamAudioApe, &param, sizeof(param));
+    return err;
+}
+
 #endif
 
 void OMXCodec::setG711Format(int32_t numChannels) {
@@ -5701,6 +5745,9 @@ static const char *audioCodingTypeString(OMX_AUDIO_CODINGTYPE type) {
         "OMX_AUDIO_CodingWMA",
         "OMX_AUDIO_CodingRA",
         "OMX_AUDIO_CodingMIDI",
+#if USES_NAM
+        "OMX_AUDIO_CodingAPE",
+#endif
     };
 
     size_t numNames = sizeof(kNames) / sizeof(kNames[0]);

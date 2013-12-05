@@ -113,7 +113,7 @@ struct AwesomeLocalRenderer : public AwesomeRenderer {
 #ifdef USES_NAM
         int64_t timeUs;
         CHECK(buffer->meta_data()->findInt64(kKeyTime, &timeUs));
-        LOGV("render %lld us (%.2f secs)", timeUs, timeUs / 1E6);
+        //LOGV("render %lld us (%.2f secs)", timeUs, timeUs / 1E6);
 #endif
         render((const uint8_t *)buffer->data() + buffer->range_offset(),
                buffer->range_length());

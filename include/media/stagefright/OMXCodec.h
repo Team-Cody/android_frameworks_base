@@ -394,6 +394,7 @@ private:
 #endif
 #ifdef USES_NAM
     status_t setRAFormat(const sp<MetaData> &inputFormat);
+    status_t setAPEFormat(const sp<MetaData> &inputFormat);
 #endif
 #ifdef QCOM_HARDWARE
     void setAC3Format(int32_t numChannels, int32_t sampleRate);

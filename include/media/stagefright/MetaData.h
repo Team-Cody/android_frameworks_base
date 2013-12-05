@@ -47,6 +47,9 @@ enum {
     kKeySampleRate        = 'srte',  // int32_t (audio sampling rate Hz)
     kKeyFrameRate         = 'frmR',  // int32_t (video frame rate fps)
     kKeyBitRate           = 'brte',  // int32_t (bps)
+#ifdef USES_NAM
+    kKeyBitspersample     = '#bps',  // int64_t
+#endif
     kKeyESDS              = 'esds',  // raw data
 #ifdef QCOM_HARDWARE
     kKeyAacCodecSpecificData = 'nacc' , // for native aac files

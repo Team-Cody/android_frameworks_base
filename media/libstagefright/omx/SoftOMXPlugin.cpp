@@ -49,6 +49,7 @@ static const struct {
     { "OMX.ffmpeg.ac3.decoder", "ffmpegadec", "audio_decoder.ac3" },
     { "OMX.ffmpeg.wma.decoder", "ffmpegadec", "audio_decoder.wma" },
     { "OMX.ffmpeg.ra.decoder", "ffmpegadec", "audio_decoder.ra" },
+    { "OMX.ffmpeg.ape.decoder", "ffmpegadec", "audio_decoder.ape" },
 #endif
 #ifdef STE_HARDWARE
     { "OMX.ST.aac.decoder", "ste_aacdec", "audio_decoder.aac" },
