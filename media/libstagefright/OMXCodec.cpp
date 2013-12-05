@@ -344,6 +344,7 @@ static const CodecInfo kDecoderInfo[] = {
     { MEDIA_MIMETYPE_VIDEO_RV, "OMX.ffmpeg.rv.decoder" },
     { MEDIA_MIMETYPE_AUDIO_RA, "OMX.ffmpeg.ra.decoder" },
     { MEDIA_MIMETYPE_AUDIO_APE, "OMX.ffmpeg.ape.decoder" },
+    { MEDIA_MIMETYPE_AUDIO_DTS, "OMX.ffmpeg.dts.decoder" },
 #endif
 };
 
@@ -1106,6 +1107,11 @@ status_t OMXCodec::configureCodec(const sp<MetaData> &meta) {
         }
     } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_APE, mMIME))  {
         status_t err = setAPEFormat(meta);
+        if(err!=OK){
+           return err;
+        }
+    } else if (!strcasecmp(MEDIA_MIMETYPE_AUDIO_DTS, mMIME))  {
+        status_t err = setDTSFormat(meta);
         if(err!=OK){
            return err;
         }
@@ -2268,6 +2274,8 @@ void OMXCodec::setComponentRole(
             "audio_decoder.ac3", NULL },
         { MEDIA_MIMETYPE_AUDIO_APE,
             "audio_decoder.ape", NULL },
+        { MEDIA_MIMETYPE_AUDIO_DTS,
+            "audio_decoder.dts", NULL },
 #endif
     };
 
@@ -5054,6 +5062,42 @@ status_t OMXCodec::setAPEFormat(const sp<MetaData> &meta)
     return err;
 }
 
+status_t OMXCodec::setDTSFormat(const sp<MetaData> &meta)
+{
+    int32_t numChannels;
+    int32_t sampleRate;
+    int32_t bitsPerSample;
+    OMX_AUDIO_PARAM_DTSTYPE param;
+
+    if (mIsEncoder) {
+        CODEC_LOGE("DTS encoding not supported");
+        return OK;
+    }
+
+    CHECK(meta->findInt32(kKeyChannelCount, &numChannels));
+    CHECK(meta->findInt32(kKeySampleRate, &sampleRate));
+    //CHECK(meta->findInt32(kKeyBitspersample, &bitsPerSample));
+
+    CODEC_LOGV("Channels: %d, SampleRate: %d",
+            numChannels, sampleRate);
+
+    InitOMXParams(&param);
+    param.nPortIndex = kPortIndexInput;
+
+    status_t err = mOMX->getParameter(
+                       mNode, OMX_IndexParamAudioDts, &param, sizeof(param));
+    if (err != OK)
+        return err;
+
+    param.nChannels = numChannels;
+    param.nSamplingRate = sampleRate;
+    //param.nBitsPerSample = bitsPerSample;
+
+    err = mOMX->setParameter(
+                    mNode, OMX_IndexParamAudioDts, &param, sizeof(param));
+    return err;
+}
+
 #endif
 
 void OMXCodec::setG711Format(int32_t numChannels) {
@@ -5747,6 +5791,7 @@ static const char *audioCodingTypeString(OMX_AUDIO_CODINGTYPE type) {
         "OMX_AUDIO_CodingMIDI",
 #if USES_NAM
         "OMX_AUDIO_CodingAPE",
+        "OMX_AUDIO_CodingDTS",
 #endif
     };
 

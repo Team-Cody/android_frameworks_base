@@ -159,7 +159,7 @@ struct AwesomeNativeWindowRenderer : public AwesomeRenderer {
         sp<MetaData> metaData = buffer->meta_data();
         metaData->setInt32(kKeyRendered, 1);
 #ifdef USES_NAM
-        LOGV("render %lld us (%.2f secs)", timeUs, timeUs / 1E6);
+        //LOGV("render %lld us (%.2f secs)", timeUs, timeUs / 1E6);
 #endif
     }
 
