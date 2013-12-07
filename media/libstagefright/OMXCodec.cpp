@@ -5044,7 +5044,7 @@ status_t OMXCodec::setFLACFormat(const sp<MetaData> &meta)
 }
 
 #endif
-
+#endif
 void OMXCodec::setG711Format(int32_t numChannels) {
     CHECK(!mIsEncoder);
     setRawAudioFormat(kPortIndexInput, 8000, numChannels);
