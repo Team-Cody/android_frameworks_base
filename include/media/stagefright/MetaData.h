@@ -47,9 +47,6 @@ enum {
     kKeySampleRate        = 'srte',  // int32_t (audio sampling rate Hz)
     kKeyFrameRate         = 'frmR',  // int32_t (video frame rate fps)
     kKeyBitRate           = 'brte',  // int32_t (bps)
-#ifdef USES_NAM
-    kKeyBitspersample     = '#bps',  // int64_t
-#endif
     kKeyESDS              = 'esds',  // raw data
 #ifdef QCOM_HARDWARE
     kKeyAacCodecSpecificData = 'nacc' , // for native aac files
@@ -120,7 +117,7 @@ enum {
     kKeyValidSamples      = 'valD',  // int32_t
 
     kKeyIsUnreadable      = 'unre',  // bool (int32_t)
-#if (defined QCOM_HARDWARE) || (defined USES_NAM)
+#ifdef QCOM_HARDWARE
     kKeyRawCodecSpecificData = 'rcsd',  // raw data - added to support mmParser
     kKeyDivXVersion       = 'DivX',  // int32_t
     kKeyDivXDrm           = 'QDrm',  // void *
@@ -133,7 +130,6 @@ enum {
     kKeyWMABitspersample  = 'bsps',  // int64_t
     kKeyWMAVirPktSize     = 'vpks',  // int64_t
     kKeyWMVProfile        = 'wmvp',   //int32_t
-    kKeyWMVVersion        = 'wmvv',  // int32_t
 #endif
 
     // An indication that a video buffer has been rendered.
@@ -156,12 +152,9 @@ enum {
     kKey3D                = '3Dvf',  // bool (int32_t)
     kKeyHFR               = 'hfr ',  // int32_t
     //Extractor sets this
-    kKeyUseArbitraryMode  = 'ArbM',  //bool (int32_t)
+    kKeyUseArbitraryMode  = 'ArbM'  //bool (int32_t)
 #endif
 
-#ifdef USES_NAM
-    kKeyBlockAlign     = 'blk',  // int32_t , should be different from kKeyWMABlockAlign
-#endif
 };
 
 enum {
@@ -169,7 +162,7 @@ enum {
     kTypeAVCC        = 'avcc',
     kTypeD263        = 'd263',
 };
-#if (defined QCOM_HARDWARE) || (defined USES_NAM)
+#ifdef QCOM_HARDWARE
 enum {
     kTypeDivXVer_3_11,
     kTypeDivXVer_4,
@@ -180,11 +173,6 @@ enum {
     kTypeWMA,
     kTypeWMAPro,
     kTypeWMALossLess,
-};
-enum {
-    kTypeWMVVer_7, // WMV1
-    kTypeWMVVer_8, // WMV2
-    kTypeWMVVer_9, // WMV3
 };
 #endif
 

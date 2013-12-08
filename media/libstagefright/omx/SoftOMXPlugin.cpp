@@ -34,25 +34,6 @@ static const struct {
     const char *mRole;
 
 } kComponents[] = {
-#ifdef USES_NAM
-    { "OMX.ffmpeg.h264.decoder", "ffmpegvdec", "video_decoder.avc" },
-    { "OMX.ffmpeg.mpeg4.decoder", "ffmpegvdec", "video_decoder.mpeg4" },
-    { "OMX.ffmpeg.mpeg2v.decoder", "ffmpegvdec", "video_decoder.mpeg2" },
-    { "OMX.ffmpeg.h263.decoder", "ffmpegvdec", "video_decoder.h263" },
-    { "OMX.ffmpeg.vc1.decoder", "ffmpegvdec", "video_decoder.vc1" },
-    { "OMX.ffmpeg.wmv.decoder", "ffmpegvdec", "video_decoder.wmv" },
-    { "OMX.ffmpeg.rv.decoder", "ffmpegvdec", "audio_decoder.rv" },
-    { "OMX.ffmpeg.mp1.decoder", "ffmpegadec", "audio_decoder.mp1" },
-    { "OMX.ffmpeg.mp2.decoder", "ffmpegadec", "audio_decoder.mp2" },    
-    { "OMX.ffmpeg.mp3.decoder", "ffmpegadec", "audio_decoder.mp3" },
-    { "OMX.ffmpeg.aac.decoder", "ffmpegadec", "audio_decoder.aac" },
-    { "OMX.ffmpeg.ac3.decoder", "ffmpegadec", "audio_decoder.ac3" },
-    { "OMX.ffmpeg.wma.decoder", "ffmpegadec", "audio_decoder.wma" },
-    { "OMX.ffmpeg.ra.decoder", "ffmpegadec", "audio_decoder.ra" },
-    { "OMX.ffmpeg.ape.decoder", "ffmpegadec", "audio_decoder.ape" },
-    { "OMX.ffmpeg.dts.decoder", "ffmpegadec", "audio_decoder.dts" },
-    { "OMX.ffmpeg.flac.decoder", "ffmpegadec", "audio_decoder.flac" },
-#endif
 #ifdef STE_HARDWARE
     { "OMX.ST.aac.decoder", "ste_aacdec", "audio_decoder.aac" },
 #endif
