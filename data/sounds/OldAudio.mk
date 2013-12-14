@@ -24,7 +24,7 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/effects/old/KeypressSpacebar.ogg:system/media/audio/ui/KeypressSpacebar.ogg \
 	$(LOCAL_PATH)/effects/old/KeypressStandard.ogg:system/media/audio/ui/KeypressStandard.ogg \
 	$(LOCAL_PATH)/effects/old/Lock.ogg:system/media/audio/ui/Lock.ogg \
-	$(LOCAL_PATH)/effects/old/LowBattery.ogg:system/media/audio/ui/LowBattery.old \
+	$(LOCAL_PATH)/effects/old/LowBattery.ogg:system/media/audio/ui/LowBattery.ogg \
 	$(LOCAL_PATH)/effects/old/VideoRecord.ogg:system/media/audio/ui/VideoRecord.ogg \
 	$(LOCAL_PATH)/effects/old/Undock.ogg:system/media/audio/ui/Undock.ogg \
 	$(LOCAL_PATH)/effects/old/Unlock.ogg:system/media/audio/ui/Unlock.ogg \
