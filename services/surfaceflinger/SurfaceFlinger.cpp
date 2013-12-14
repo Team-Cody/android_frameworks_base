@@ -113,7 +113,7 @@ SurfaceFlinger::SurfaceFlinger()
 #endif
         mConsoleSignals(0),
         mSecureFrameBuffer(0),
-        mPrefer16bpp(0)
+        mPrefer16bpp(0),
         mUseDithering(0)
 
 {
