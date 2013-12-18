@@ -47,12 +47,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:scaleType="fitXY"
-            android:src="@drawable/status_bar_close_on"
+            android:clickable="true"
+            android:src="@drawable/status_bar_close"
             />
 
     </com.android.systemui.statusbar.phone.CloseDragHandle>
