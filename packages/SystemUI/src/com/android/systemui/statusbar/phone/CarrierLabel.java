@@ -20,6 +20,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.provider.Telephony;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -27,6 +29,7 @@ import android.util.Slog;
 import android.view.View;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -44,7 +47,7 @@ public class CarrierLabel extends TextView {
 	private static final String TAG = "CarrierLabel";
 	
     private boolean mAttached;
-
+    
     public CarrierLabel(Context context) {
         this(context, null);
     }
@@ -84,6 +87,7 @@ public class CarrierLabel extends TextView {
         @Override
         public void onReceive(Context context, Intent intent) {
 			Log.d(TAG, "Received an Intent");
+			
             String action = intent.getAction();
             if (Telephony.Intents.SPN_STRINGS_UPDATED_ACTION.equals(action)) {
                 updateNetworkName(intent.getBooleanExtra(Telephony.Intents.EXTRA_SHOW_SPN, false),
@@ -93,7 +97,17 @@ public class CarrierLabel extends TextView {
             }
             
             if (BROADCAST.equals(action)) {
-                setText(intent.getStringExtra("EXTRA_CARRIER_NAME"));
+				String newCarrierLabel = intent.getStringExtra("EXTRA_CARRIER_NAME");
+				SharedPreferences mSharedPreferences = getContext().getSharedPreferences("Custom_Prefs", 0);
+				SharedPreferences.Editor editor = mSharedPreferences.edit();
+				editor.putString("carrier_label", newCarrierLabel);
+				editor.commit();
+				if(!newCarrierLabel.equals("")){
+                    setText(newCarrierLabel);
+                } else {
+					setText(mSharedPreferences.getString("original_carrier_label", "MiniCM4Pico"));
+                }
+                
             }
         }
     };
@@ -116,6 +130,20 @@ public class CarrierLabel extends TextView {
             str.append(spn);
             something = true;
         }
+        
+        SharedPreferences mSharedPreferences = getContext().getSharedPreferences("Custom_Prefs", 0);
+        String mCarrierLabel = mSharedPreferences.getString("carrier_label", "");
+        
+        Log.d(TAG, "Saved label name = " + mCarrierLabel);
+        
+        if(!mCarrierLabel.equals("")){
+			setText(mCarrierLabel);
+            return;
+        }
+        
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("original_carrier_label", str.toString());
+        editor.commit();
         
         if (something) {
             setText(str.toString());
