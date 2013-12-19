@@ -5,9 +5,12 @@ import java.lang.Runtime;
 
 import android.util.Log;
 
-public class getCoreExec {
+/** A class to execute SU commands without invoking the SuperUser app
+ * */
+
+public class SuCommand {
     
-    private static final String TAG = "CoreExec";
+    private static final String TAG = "SuCommand";
         
     public static void execute(String command) {
         
