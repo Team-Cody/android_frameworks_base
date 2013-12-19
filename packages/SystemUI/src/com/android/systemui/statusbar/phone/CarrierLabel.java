@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.provider.Telephony;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.Slog;
 import android.view.View;
 import android.widget.TextView;
@@ -37,6 +38,11 @@ import com.android.internal.R;
  * minutes.
  */
 public class CarrierLabel extends TextView {
+	
+	public static final String BROADCAST = "com.android.systemui.statusbar.phone.android.action.CHANGE_CARRIER_LABEL";
+	
+	private static final String TAG = "CarrierLabel";
+	
     private boolean mAttached;
 
     public CarrierLabel(Context context) {
@@ -60,6 +66,7 @@ public class CarrierLabel extends TextView {
             mAttached = true;
             IntentFilter filter = new IntentFilter();
             filter.addAction(Telephony.Intents.SPN_STRINGS_UPDATED_ACTION);
+            filter.addAction(BROADCAST);
             getContext().registerReceiver(mIntentReceiver, filter, null, getHandler());
         }
     }
@@ -76,12 +83,17 @@ public class CarrierLabel extends TextView {
     private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+			Log.d(TAG, "Received an Intent");
             String action = intent.getAction();
             if (Telephony.Intents.SPN_STRINGS_UPDATED_ACTION.equals(action)) {
                 updateNetworkName(intent.getBooleanExtra(Telephony.Intents.EXTRA_SHOW_SPN, false),
                         intent.getStringExtra(Telephony.Intents.EXTRA_SPN),
                         intent.getBooleanExtra(Telephony.Intents.EXTRA_SHOW_PLMN, false),
                         intent.getStringExtra(Telephony.Intents.EXTRA_PLMN));
+            }
+            
+            if (BROADCAST.equals(action)) {
+                setText(intent.getStringExtra("EXTRA_CARRIER_NAME"));
             }
         }
     };
@@ -104,6 +116,7 @@ public class CarrierLabel extends TextView {
             str.append(spn);
             something = true;
         }
+        
         if (something) {
             setText(str.toString());
         } else {
