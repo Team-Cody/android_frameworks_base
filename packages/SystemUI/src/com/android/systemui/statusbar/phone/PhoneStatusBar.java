@@ -1475,6 +1475,7 @@ public class PhoneStatusBar extends StatusBar {
         mTracking = false;
         mVelocityTracker.recycle();
         mVelocityTracker = null;
+        mCloseView.setPressed(false);
     }
 
     void incrementAnim() {
@@ -1537,6 +1538,8 @@ public class PhoneStatusBar extends StatusBar {
         // there are some race conditions that cause this to be inaccurate; let's recalculate it any
         // time we're about to drag the panel
         updateExpandedSize();
+
+        mCloseView.setPressed(true);
 
         mTracking = true;
         mVelocityTracker = VelocityTracker.obtain();
