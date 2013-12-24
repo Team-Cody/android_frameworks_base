@@ -43,7 +43,7 @@
             >-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="52dp"
             android:paddingTop="3dp"
             android:paddingBottom="5dp"
             android:paddingRight="3dp"
@@ -62,7 +62,7 @@
             <ImageView android:id="@+id/settings_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_toRightOf="@id/date"
+                android:layout_alignParentRight="true"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:src="@drawable/ic_notify_quicksettings"
@@ -86,8 +86,9 @@
         />
 
     </LinearLayout>
-<!--
-    <View
+
+<!-- We don't want a horizondal ruler here. Instead we'll use a different texture! -->
+<!--    <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="@drawable/status_bar_hr"

@@ -70,6 +70,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -420,6 +421,9 @@ public class PhoneStatusBar extends StatusBar {
         mClearButton.setEnabled(false);
         mDateView = (DateView)expanded.findViewById(R.id.date);
         mSettingsButton = expanded.findViewById(R.id.settings_button);
+		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
+		params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
+		mSettingsButton.setLayoutParams(params);
         mSettingsButton.setOnClickListener(mSettingsButtonListener);
         mScrollView = (ScrollView)expanded.findViewById(R.id.scroll);
 
@@ -1147,7 +1151,17 @@ public class PhoneStatusBar extends StatusBar {
                     + " any=" + any + " clearable=" + clearable);
         }
 
-        mClearButton.setVisibility(clearable ? View.VISIBLE : View.GONE);
+		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
+		if (clearable) {
+			mClearButton.setVisibility(View.VISIBLE);
+			params.setMargins(0, 0, 40, 0); //substitute parameters for left, top, right, bottom
+			mSettingsButton.setLayoutParams(params);
+		} else {
+			mClearButton.setVisibility(View.GONE);
+			params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
+			mSettingsButton.setLayoutParams(params);
+		}
+      
         mClearButton.setEnabled(clearable);
 
         if (DEBUG) {
