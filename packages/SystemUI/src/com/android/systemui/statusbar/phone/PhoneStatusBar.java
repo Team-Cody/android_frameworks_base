@@ -182,6 +182,9 @@ public class PhoneStatusBar extends StatusBar {
     // top bar
     TextView mNoNotificationsTitle;
     View mClearButton;
+    
+    // mSettingsButton is now aligned to parent right
+    // margins are set in code :)
     View mSettingsButton;
 
     // drag bar
@@ -421,9 +424,11 @@ public class PhoneStatusBar extends StatusBar {
         mClearButton.setEnabled(false);
         mDateView = (DateView)expanded.findViewById(R.id.date);
         mSettingsButton = expanded.findViewById(R.id.settings_button);
-		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
-		params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
-		mSettingsButton.setLayoutParams(params);
+		// Set Settings button to far right, as a precautionary measure
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
+        params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
+        mSettingsButton.setLayoutParams(params);
+        //
         mSettingsButton.setOnClickListener(mSettingsButtonListener);
         mScrollView = (ScrollView)expanded.findViewById(R.id.scroll);
 
@@ -1151,16 +1156,18 @@ public class PhoneStatusBar extends StatusBar {
                     + " any=" + any + " clearable=" + clearable);
         }
 
-		RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
-		if (clearable) {
-			mClearButton.setVisibility(View.VISIBLE);
-			params.setMargins(0, 0, 40, 0); //substitute parameters for left, top, right, bottom
-			mSettingsButton.setLayoutParams(params);
-		} else {
-			mClearButton.setVisibility(View.GONE);
-			params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
-			mSettingsButton.setLayoutParams(params);
-		}
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
+        if (clearable) {
+            // If clearable button exists, pull back Settings button by 40 px
+            mClearButton.setVisibility(View.VISIBLE);
+            params.setMargins(0, 0, 40, 0); //substitute parameters for left, top, right, bottom
+            mSettingsButton.setLayoutParams(params);
+        } else {
+            // If not, set it back to far right
+            mClearButton.setVisibility(View.GONE);
+            params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
+            mSettingsButton.setLayoutParams(params);
+        }
       
         mClearButton.setEnabled(clearable);
 
