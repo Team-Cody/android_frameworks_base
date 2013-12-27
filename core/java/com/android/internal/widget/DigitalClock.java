@@ -27,12 +27,14 @@ import android.graphics.Typeface;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.format.DateFormat;
+import android.text.Html;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
+import java.lang.String;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
 
@@ -42,10 +44,11 @@ import java.util.Calendar;
 public class DigitalClock extends RelativeLayout {
 
     private static final String SYSTEM = "/system/fonts/";
-    private static final String SYSTEM_FONT_TIME_BACKGROUND = SYSTEM + "AndroidClock.ttf";
-    private static final String SYSTEM_FONT_TIME_FOREGROUND = SYSTEM + "AndroidClock_Highlight.ttf";
-    private final static String M12 = "h:mm";
-    private final static String M24 = "kk:mm";
+    private static final String SYSTEM_FONT_TIME_BACKGROUND = SYSTEM + "DroidSansMono.ttf";
+    private static final String SYSTEM_FONT_TIME_FOREGROUND = SYSTEM + "DroidSansMono.ttf";
+    private static final String M_HOUR12 = "h";
+    private static final String M_HOUR24 = "kk";
+    private final static String M_MINUTE = ":mm";
 
     private Calendar mCalendar;
     private String mFormat;
@@ -231,7 +234,10 @@ public class DigitalClock extends RelativeLayout {
     private void updateTime() {
         mCalendar.setTimeInMillis(System.currentTimeMillis());
 
-        CharSequence newTime = DateFormat.format(mFormat, mCalendar);
+        CharSequence newHour = DateFormat.format(mFormat, mCalendar);
+        newHour = "<b>" + newHour + "</b>";
+        CharSequence newMinut = DateFormat.format(M_MINUTE, mCalendar);
+        String newTime = Html.fromHtml(newHour + newMinut);
         mTimeDisplayBackground.setText(newTime);
         mTimeDisplayForeground.setText(newTime);
         mAmPm.setIsMorning(mCalendar.get(Calendar.AM_PM) == 0);
@@ -239,7 +245,7 @@ public class DigitalClock extends RelativeLayout {
 
     private void setDateFormat() {
         mFormat = android.text.format.DateFormat.is24HourFormat(getContext())
-            ? M24 : M12;
+            ? M_HOUR24 : M_HOUR12;
         mAmPm.setShowAmPm(mFormat.equals(M12));
     }
 }
