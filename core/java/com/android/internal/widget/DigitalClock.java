@@ -34,6 +34,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
+import java.lang.CharSequence;
 import java.lang.String;
 import java.text.DateFormatSymbols;
 import java.util.Calendar;
@@ -237,15 +238,15 @@ public class DigitalClock extends RelativeLayout {
         CharSequence newHour = DateFormat.format(mFormat, mCalendar);
         newHour = "<b>" + newHour + "</b>";
         CharSequence newMinut = DateFormat.format(M_MINUTE, mCalendar);
-        String newTime = Html.fromHtml(newHour + newMinut);
-        mTimeDisplayBackground.setText(newTime);
-        mTimeDisplayForeground.setText(newTime);
+        String newTime = newHour.toString() + newMinut.toString();
+        mTimeDisplayBackground.setText(Html.fromHtml(newTime));
+        mTimeDisplayForeground.setText(Html.fromHtml(newTime));
         mAmPm.setIsMorning(mCalendar.get(Calendar.AM_PM) == 0);
     }
 
     private void setDateFormat() {
         mFormat = android.text.format.DateFormat.is24HourFormat(getContext())
             ? M_HOUR24 : M_HOUR12;
-        mAmPm.setShowAmPm(mFormat.equals(M12));
+        mAmPm.setShowAmPm(mFormat.equals(M_HOUR12));
     }
 }
