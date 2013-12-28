@@ -32,9 +32,8 @@
 
     <com.android.internal.widget.DigitalClock android:id="@+id/time"
         android:layout_marginTop="@dimen/keyguard_lockscreen_status_line_clockfont_top_margin"
-        android:layout_marginBottom="12dip"
-        android:layout_marginRight="@dimen/keyguard_lockscreen_status_line_font_right_margin"
-        android:layout_gravity="right">
+        android:layout_marginBottom="@dimen/keyguard_lockscreen_status_line_clockfont_bottom_margin"
+        android:layout_gravity="center">
 
         <!-- Because we can't have multi-tone fonts, we render two TextViews, one on
         top of the other. Hence the redundant layout... -->
@@ -45,7 +44,7 @@
             android:ellipsize="none"
             android:textSize="@dimen/keyguard_lockscreen_clock_font_size"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="6dip"
+            android:layout_marginBottom="5dip"
             android:textColor="@color/lockscreen_clock_background"
             />
 
@@ -56,7 +55,7 @@
             android:ellipsize="none"
             android:textSize="@dimen/keyguard_lockscreen_clock_font_size"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="6dip"
+            android:layout_marginBottom="5dip"
             android:textColor="@color/lockscreen_clock_foreground"
             android:layout_alignLeft="@id/timeDisplayBackground"
             android:layout_alignTop="@id/timeDisplayBackground"
@@ -222,7 +221,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="302dip">
+        android:layout_height="302dip"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="6dip" >
 
     <!-- CyanogenMod Calendar Panel -->
     <LinearLayout
@@ -314,7 +315,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="12dip"
+            android:layout_marginBottom="6dip"
             android:gravity="center_horizontal"
             android:singleLine="true"
             android:ellipsize="marquee"
