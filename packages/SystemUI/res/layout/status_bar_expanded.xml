@@ -31,45 +31,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/notification_header_bg"
+        
     >
-        <!--<RelativeLayout
-            android:layout_width="wrap_parent"
-            android:layout_height="80dp"
-            android:paddingTop="3dp"
-            android:paddingBottom="5dp"
-            android:paddingRight="3dp"
-            android:background="@drawable/status_bar_ticker_background"
-            >-->
+        
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+			android:background="@drawable/notification_header_bg"
+            android:layout_height="48dp"
             android:paddingTop="3dp"
             android:paddingBottom="5dp"
             android:paddingRight="3dp"
-            android:background="@drawable/status_bar_ticker_background"
             >
-
+			<com.android.systemui.statusbar.policy.Clock 
+				android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Clock" 
+				android:id="@id/clock" android:layout_width="wrap_content" 
+				android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" 
+				android:singleLine="true" />
             <com.android.systemui.statusbar.policy.DateView android:id="@+id/date"
-                android:textAppearance="@style/TextAppearance.StatusBar.Date"
+                android:textAppearance="@style/TextAppearance.StatusBar.Expanded.Date"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:gravity="center_vertical|left"
-                android:paddingLeft="16dp"
-            />
+                android:layout_height="fill_parent"
+                android:singleLine="false" android:layout_toRightOf="@id/clock"
+                android:gravity="left|center"
+                android:paddingLeft="5.0dip" android:paddingTop="2.0dip"
+                />
+            <!--
+            <com.android.systemui.statusbar.phone.CarrierLabel
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="1dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="1dp"
+                android:paddingLeft="4dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="?android:attr/textColorSecondary"
+                />
+            -->
 
             <ImageView android:id="@+id/settings_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/date"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:src="@drawable/ic_notify_quicksettings"
                 android:contentDescription="@string/accessibility_settings_button"
                 />
 
-           <ImageView android:id="@+id/clear_all_button"
+            
+
+            <ImageView android:id="@+id/clear_all_button"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -79,21 +93,14 @@
                 android:contentDescription="@string/accessibility_clear_all"
                 />            
         </RelativeLayout>
-
-     <com.android.systemui.statusbar.powerwidget.PowerWidget android:id="@+id/exp_power_stat"
+		<com.android.systemui.statusbar.powerwidget.PowerWidget android:id="@+id/exp_power_stat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
         />
-
     </LinearLayout>
 
-<!-- We don't want a horizondal ruler here. Instead we'll use a different texture! -->
-<!--    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@drawable/status_bar_hr"
-        />
--->
+    
+
     <FrameLayout
         android:layout_width="match_parent" 
         android:layout_height="wrap_content"

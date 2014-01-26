@@ -29,7 +29,6 @@ import android.widget.TextView;
 import com.android.systemui.R;
 
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public final class DateView extends TextView {
     private static final String TAG = "DateView";
@@ -88,15 +87,11 @@ public final class DateView extends TextView {
     }
 
     private final void updateClock() {
-        StringBuilder builder = new StringBuilder();        
-        SimpleDateFormat cTime = new SimpleDateFormat("hh:mm a");
-        String currentTime = cTime.format(new Date());
-        builder.append(currentTime);
-        builder.append("\n");
-        cTime = new SimpleDateFormat("MMM F, yyyy");
-        currentTime = cTime.format(new Date());
-        builder.append(currentTime);
-        setText(builder.toString());
+        final Context context = getContext();
+        Date now = new Date();
+        CharSequence dow = DateFormat.format("EEEE", now);
+        CharSequence date = DateFormat.getLongDateFormat(context).format(now);
+        setText(context.getString(R.string.status_bar_date_formatter, dow, date));
     }
 
     private boolean isVisible() {
