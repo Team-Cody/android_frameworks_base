@@ -105,7 +105,7 @@ public class CarrierLabel extends TextView {
 				if(!newCarrierLabel.equals("")){
                     setText(newCarrierLabel);
                 } else {
-					setText(mSharedPreferences.getString("original_carrier_label", "MiniCM4Pico"));
+					setText(mSharedPreferences.getString("original_carrier_label", "CodyROM"));
                 }
                 
             }
