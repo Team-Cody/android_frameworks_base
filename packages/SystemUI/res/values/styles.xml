@@ -118,16 +118,5 @@
         <item name="android:textColor">?android:attr/textColorPrimary</item>
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="TextAppearance.StatusBar.Expanded" parent="@*android:style/TextAppearance.StatusBar" />
-    <style name="TextAppearance.StatusBar.Expanded.Clock" parent="@style/TextAppearance.StatusBar.Expanded">
-        <item name="android:textSize">32.0dip</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">#ffffffff</item>
-    </style>
-    <style name="TextAppearance.StatusBar.Expanded.Date" parent="@style/TextAppearance.StatusBar.Expanded">
-        <item name="android:textSize">12.0dip</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:textColor">#ffcccccc</item>
-        <item name="android:textAllCaps">true</item>
-    </style>
+    
 </resources>

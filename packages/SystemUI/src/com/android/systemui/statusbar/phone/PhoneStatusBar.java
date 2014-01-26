@@ -70,6 +70,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.RemoteViews;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -181,6 +182,9 @@ public class PhoneStatusBar extends StatusBar {
     // top bar
     TextView mNoNotificationsTitle;
     View mClearButton;
+    
+    // mSettingsButton is now aligned to parent right
+    // margins are set in code :)
     View mSettingsButton;
 
     // drag bar
@@ -420,6 +424,11 @@ public class PhoneStatusBar extends StatusBar {
         mClearButton.setEnabled(false);
         mDateView = (DateView)expanded.findViewById(R.id.date);
         mSettingsButton = expanded.findViewById(R.id.settings_button);
+		// Set Settings button to far right, as a precautionary measure
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
+        params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
+        mSettingsButton.setLayoutParams(params);
+        //
         mSettingsButton.setOnClickListener(mSettingsButtonListener);
         mScrollView = (ScrollView)expanded.findViewById(R.id.scroll);
 
@@ -1147,7 +1156,19 @@ public class PhoneStatusBar extends StatusBar {
                     + " any=" + any + " clearable=" + clearable);
         }
 
-        mClearButton.setVisibility(clearable ? View.VISIBLE : View.GONE);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams)mSettingsButton.getLayoutParams();
+        if (clearable) {
+            // If clearable button exists, pull back Settings button by 40 px
+            mClearButton.setVisibility(View.VISIBLE);
+            params.setMargins(0, 0, 40, 0); //substitute parameters for left, top, right, bottom
+            mSettingsButton.setLayoutParams(params);
+        } else {
+            // If not, set it back to far right
+            mClearButton.setVisibility(View.GONE);
+            params.setMargins(0, 0, 0, 0); //substitute parameters for left, top, right, bottom
+            mSettingsButton.setLayoutParams(params);
+        }
+      
         mClearButton.setEnabled(clearable);
 
         if (DEBUG) {
@@ -1475,6 +1496,7 @@ public class PhoneStatusBar extends StatusBar {
         mTracking = false;
         mVelocityTracker.recycle();
         mVelocityTracker = null;
+        mCloseView.setPressed(false);
     }
 
     void incrementAnim() {
@@ -1537,6 +1559,8 @@ public class PhoneStatusBar extends StatusBar {
         // there are some race conditions that cause this to be inaccurate; let's recalculate it any
         // time we're about to drag the panel
         updateExpandedSize();
+
+        mCloseView.setPressed(true);
 
         mTracking = true;
         mVelocityTracker = VelocityTracker.obtain();

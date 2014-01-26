@@ -18,6 +18,8 @@
 -->
 <resources>
     <drawable name="notification_number_text_color">#ff000000</drawable>
+    <drawable name="notification_item_background_color">#ff111111</drawable>
+    <drawable name="notification_item_background_color_pressed">#ff257390</drawable>
     <drawable name="ticker_background_color">#ff1d1d1d</drawable>
     <drawable name="status_bar_background">#ff000000</drawable>
     <drawable name="status_bar_recents_background_solid">#b3000000</drawable>
