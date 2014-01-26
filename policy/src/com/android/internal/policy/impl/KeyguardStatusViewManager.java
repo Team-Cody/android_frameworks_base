@@ -20,14 +20,12 @@ package com.android.internal.policy.impl;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
-import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -52,7 +50,6 @@ import com.android.internal.widget.TransportControlView;
 
 import org.w3c.dom.Document;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -874,14 +871,7 @@ class KeyguardStatusViewManager implements OnClickListener {
                 break;
         }
 
-        SharedPreferences mSharedPreferences = getContext().getSharedPreferences("Custom_Prefs", 0);
-        String mCarrierLabel = mSharedPreferences.getString("carrier_label", "");
-        Log.d(TAG, "Saved label name = \"" + mCarrierLabel + "\"");
-        if(!mCarrierLabel.equals("")){
-			setCarrierText(mCarrierLabel);
-		} else {
-			setCarrierText(carrierText);
-		}
+        setCarrierText(carrierText);
         setCarrierHelpText(carrierHelpTextId);
         updateEmergencyCallButtonState(mPhoneState);
     }
