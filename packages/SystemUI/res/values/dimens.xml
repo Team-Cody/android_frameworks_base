@@ -48,7 +48,7 @@
     <dimen name="navigation_bar_deadzone_size">12dp</dimen>
 
     <!-- thickness (height) of each notification row, including any separators or padding -->
-    <dimen name="notification_height">65dp</dimen>
+    <dimen name="notification_height">70dp</dimen>
 
     <!-- Height of notification icons in the status bar -->
     <dimen name="status_bar_icon_size">@*android:dimen/status_bar_icon_size</dimen>

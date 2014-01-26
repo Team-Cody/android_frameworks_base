@@ -231,22 +231,24 @@ please see styles_device_defaults.xml.
     </style>
     <!-- Notification content styles -->
     <style name="TextAppearance.StatusBar.EventContent">
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#ff999999</item>
+        <item name="android:textSize">14.0dip</item>
     </style>
     <style name="TextAppearance.StatusBar.EventContent.Title">
-        <item name="android:textColor">?android:attr/textColorPrimary</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#ffffffff</item>
+        <item name="android:textSize">18.0dip</item>
         <item name="android:textStyle">bold</item>
     </style>
     <style name="TextAppearance.StatusBar.EventContent.Line2">
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">12.0dip</item>
     </style>
     <style name="TextAppearance.StatusBar.EventContent.Info">
-        <!-- inherit all -->
+        <item name="android:textSize">12.0dip</item>
+        <item name="android:textColor">#ff999999</item>
     </style>
     <style name="TextAppearance.StatusBar.EventContent.Time">
-        <!-- inherit all -->
+        <item name="android:textSize">12.0dip</item>
+        <item name="android:textColor">#ff999999</item>
     </style>
 
     <style name="TextAppearance.Small.CalendarViewWeekDayView">
