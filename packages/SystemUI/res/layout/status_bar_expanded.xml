@@ -54,20 +54,6 @@
                 android:gravity="left|center"
                 android:paddingLeft="5.0dip" android:paddingTop="2.0dip"
                 />
-            <!--
-            <com.android.systemui.statusbar.phone.CarrierLabel
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginTop="1dp"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_vertical"
-                android:paddingBottom="1dp"
-                android:paddingLeft="4dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="?android:attr/textColorSecondary"
-                />
-            -->
 
             <ImageView android:id="@+id/settings_button"
                 android:layout_width="wrap_content"

@@ -48,7 +48,7 @@
     <dimen name="navigation_bar_deadzone_size">12dp</dimen>
 
     <!-- thickness (height) of each notification row, including any separators or padding -->
-    <dimen name="notification_height">70dp</dimen>
+    <dimen name="notification_height">64dp</dimen>
 
     <!-- Height of notification icons in the status bar -->
     <dimen name="status_bar_icon_size">@*android:dimen/status_bar_icon_size</dimen>
@@ -63,7 +63,7 @@
     <dimen name="status_bar_icon_padding">0dp</dimen>
 
     <!-- thickness (height) of dividers between each notification row -->
-    <dimen name="notification_divider_height">1dp</dimen>
+    <dimen name="notification_divider_height">0dp</dimen>
 
     <!-- Notification drawer tuning parameters (phone UI) -->
     <!-- Initial velocity of the shade when expanding on its own -->
@@ -92,5 +92,5 @@
     <dimen name="global_screenshot_bg_padding">20dp</dimen>
 
     <!-- Carrier label bottom padding -->
-    <dimen name="carrier_label_bottom">20dp</dimen>
+    <dimen name="carrier_label_bottom">10dp</dimen>
 </resources>
